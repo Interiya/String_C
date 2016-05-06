@@ -18,7 +18,7 @@ String::Representation::Representation(const char *_data, size_t _l) {
     counter = 1;
 }
 
-Representation *String::Representation::Copy() {
+String::Representation *String::Representation::Copy() {
     if (counter == 1) return this;
     counter--;
     return new Representation(data,l);
