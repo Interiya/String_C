@@ -33,13 +33,13 @@ char *String::buf = 0;
 String::CharReference::CharReference(String *string1, size_t _i):
         s(string1),i(_i){}
 
-String::CharReference &String::CharReference::operator=(char c) {
+String::CharReference &String::CharReference::operator=(char c){
     s->representation = s->representation->Copy();
     s->representation->data[i] = c;
     return *this;
 }
 
-String::CharReference::operator char() {
+String::CharReference::operator char(){
     return s->representation->data[i];
 }
 
@@ -71,7 +71,7 @@ void String::decrease_counter(){
     }
 }
 
-bool String::operator==(const String &a) {
+bool String::operator==(const String &a){
     if (representation->l == a.representation->l){
         for (int i = 0; i < representation->l; ++i) {
             if (representation->data[i] != a.representation->data[i])
@@ -81,7 +81,23 @@ bool String::operator==(const String &a) {
     } else return true;
 }
 
-String::CharReference String::operator[](size_t _i) {
+bool String::operator!=(const String &a){
+    if (operator==(a)) return false;
+    return true;
+}
+
+String String::operator+(const String& a){
+    representation->l += a.representation->l;
+    representation = representation->Copy();
+    strcat(representation->data,a.representation->data);
+    return *this;
+}
+
+String String::operator+=(const String &a){
+    return operator+(a);
+}
+
+String::CharReference String::operator[](size_t _i){
     //проверить выход за границу
     return CharReference(this,_i);
 }

@@ -37,6 +37,9 @@ public:
     const char *c_str() const;
     void decrease_counter();
     bool operator==(const String&);
+    bool operator!=(const String&);
+    String operator+(const String&);
+    String operator+=(const String&);
     CharReference operator[](size_t);
 
 };
